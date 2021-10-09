@@ -24,3 +24,43 @@
 
 # Reflect
     Reflect 并不是一个类，是一个内置的对象。不能直接实例化（new）使用，它的功能比较和 Proxy 的 handles 有点类似，在这一点的基础上又添加了很多 Object 方法
+
+# 原理
+@vue/reactivity 的依赖收集（track）和触发更新（trigger），以及副作用（effect）
+## reactive 
+reactive 是 vue3 中用于生成引用类型的 api
+```javascript
+    const user = reactive({
+        name: 'Evildoer',
+        age: 23,
+        desc: '前端开发者'
+    })
+```
+在内部，对传入的对象进行了一个 target 的只读判断，如果传入的 target 是一个只读代理的话，会直接返回掉。对于正常的 reactivity 的话则是返回了 createReactiveObject 的方法的值
+
+## createReactiveObject
+在 createReactiveObject 中，做的事情就是为 target 添加一个 proxy 代理。
+核心：reactive 最终拿到的是一个 proxy 代理。
+1. 首先先判断当前 target 的类型，如果不符合要求，直接抛出警告并且返回原来的值
+```typescript
+    if (!isObject(target)) {
+        if (__DEV__) {
+            console.warn(`value cannot be made reactive: ${String(target)}`)
+        }
+    }
+```
+2. 其次判断当前对象是否已经被代理且并不是只读的，那么本身就是一个代理对象，那么就没有必要去进行代理了，直接将其当作返回值返回，避免重复代码
+```typescript
+    if (target[ReactiveFlags.RAW] && !(isReadonly && target[ReactiveFlags.IS_REACTIVE])) {
+        return target
+    }
+```
+3. createReactiveObject 创建 target 的 proxy，并将其放到 Map 中记录
+```typescript
+    const proxy = new Proxy(
+        target,
+        targetType === TargetType.COLLECTION ? collectionHandlers: baseHandlers
+    )
+    proxyMap.set(target, proxy)
+    return proxy
+```
