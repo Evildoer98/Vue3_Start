@@ -64,3 +64,8 @@ reactive 是 vue3 中用于生成引用类型的 api
     proxyMap.set(target, proxy)
     return proxy
 ```
+
+## handles 的类型
+在对象类型中，将 Object 和 Array 与 Map、Set、WeakMap、WeakSet 区分开。调用不同的 Proxy Handle
+* baseHandlers.ts: Object & Array 会调用此文件下的 mutableHandlers 对象作为 Proxy Handle
+* collectionHandlers.ts：Map、Set、WeakMap、WeakSet 会调用此文件下的 mutableCollectionHandles 对象作为 Proxy Handle
