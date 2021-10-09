@@ -18,4 +18,9 @@
 # Proxy
     在 @vue/reactivity中，Proxy 是整个调度的基石
     通过 Proxy 代理对象，才能够在 get、set 方法中完成后续的事情，eg：依赖收集、effect、track、trigger 等操作
-    
+    简易的 Proxy，在其中 handleCallback 中写了 set、get 两个方法，又来拦截当前属性值变化的数据监听
+
+    在对值进行赋值修改和打印的时候，分别触发了当前的 set 和 get 方法
+
+# Reflect
+    Reflect 并不是一个类，是一个内置的对象。不能直接实例化（new）使用，它的功能比较和 Proxy 的 handles 有点类似，在这一点的基础上又添加了很多 Object 方法
