@@ -10,18 +10,21 @@ import resolvePlugin from '@rollup/plugin-node-resolve'
 
 
 // 根据环境变量中的 target 属性 获取对应模块中的 packages.json
+// if (!process.env.TARGET) {
+//     throw new Error('TARGET package must be specified via --environment flag.')
+// }
 
 // 1. 在当前目录下查找到 packages 文件夹
 const packagesDir = path.resolve(__dirname, 'packages')
 
 // 2. 找到要打包的对应的目标目录
-const packageDir = path.resolve(packagesDir, process.env.TARGET || '')
+const packageDir = path.resolve(packagesDir, process.env.TARGET)
 
 // 封装出一个寻找对应包下的文件的方法
 const resolve = p => path.resolve(packageDir, p)
 
 // 3. 找到对应的包目录对应的 packages.json
-const pkg = require(resolve('package.json'))
+const pkg = require(resolve(`package.json`))
 
 // 获取文件名
 const name = path.basename(packageDir)
@@ -32,20 +35,21 @@ const name = path.basename(packageDir)
 const outputConfig  = {
     'esm-bundler': {
         file: resolve(`dist/${name}.esm-bundler.js`),
-        format: 'es'
+        format: `es`
     },
-    'cjs': {
+    cjs: {
         file: resolve(`dist/${name}.cjs.js`),
-        format: 'cjs'
+        format: `cjs`
     },
-    'global': {
+    global: {
         file: resolve(`dist/${name}.globar.js`),
-        format: 'iife'  // 立即执行函数
+        format: `iife`  // 立即执行函数
     }
 }
 
 // 5. 对应包中的 package.json 的 buildOptions
-const options = pkg.buildOptions
+const options = pkg.buildOptions || {}
+// const  options= pkg.buildOptions
 
 // 6. 创建出 rollup 配置
 const createConfig = (format, output) => {

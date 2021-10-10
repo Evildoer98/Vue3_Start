@@ -1,0 +1,1 @@
+{"version":3,"file":"reactivity.globar.js","sources":["../src/index.ts"],"sourcesContent":["const Reactivity = {\n\n}\nexport {\n    Reactivity\n}\n"],"names":[],"mappings":";;;UAAM,UAAU,GAAG;;;;;;;;;;;;"}

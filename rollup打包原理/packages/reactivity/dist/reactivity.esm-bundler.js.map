@@ -1,0 +1,1 @@
+{"version":3,"file":"reactivity.esm-bundler.js","sources":["../src/index.ts"],"sourcesContent":["const Reactivity = {\n\n}\nexport {\n    Reactivity\n}\n"],"names":[],"mappings":"MAAM,UAAU,GAAG;;;;"}

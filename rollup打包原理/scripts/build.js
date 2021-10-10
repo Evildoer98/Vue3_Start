@@ -5,14 +5,17 @@ const execa = require('execa')
 
 
 // 同步读取 packages 目录下的文件
-const targets = fs.readdirSync('packages').filter (f => {
-    // 过滤出需要打包的文件
-    // 保留文件夹，剔除掉文件
-    if (!fs.statSync(`packages/${f}`)) {
-        return false
-    }
-    return true
-})
+// const targets = fs.readdirSync('packages').filter (f => {
+//     // 过滤出需要打包的文件
+//     // 保留文件夹，剔除掉文件
+//     if (!fs.statSync(`packages/${f}`)) {
+//         return false
+//     }
+//     return true
+// })
+//  读取packages文件夹下所有文件， 并且过滤 
+const targets = fs.readdirSync('packages').filter(f => fs.statSync(`packages/${f}`).isDirectory())
+
 
 // 打包方法
 const build = async (target) => {
@@ -23,7 +26,7 @@ const build = async (target) => {
     // --environment 表示采用环境变量
     // TARGET 目标
     // stdio 子进程打包的信息共享给父进程
-    await execa('rollup', ['-c', '--environement',, `TARGET:${target}`], {stdio: 'inherit'})
+    await execa('rollup', ['-c', '--environment', [`TARGET:${target}`, `SOURCE_MAP:ture`].join(',')], { stdio: 'inherit' })
 }
 
 // 对多个目标打包的方法
