@@ -1,6 +1,10 @@
+import {shared} from '@vue/shared'
+
 const Reactivity = {
 
 }
+
 export {
-    Reactivity
-}
+    // Reactivity
+    reactive, shallowReactive, readonly, shallowReadonly
+} from './reactive'
