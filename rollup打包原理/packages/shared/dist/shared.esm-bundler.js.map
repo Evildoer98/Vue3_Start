@@ -1,1 +1,1 @@
-{"version":3,"file":"shared.esm-bundler.js","sources":["../src/index.ts"],"sourcesContent":["const shared = {\n    \n}\n\nexport {\n    shared\n}"],"names":[],"mappings":"MAAM,MAAM,GAAG;;;;"}
+{"version":3,"file":"shared.esm-bundler.js","sources":["../src/index.ts"],"sourcesContent":["export const isObject = (val: unknown): val is Record<any, any> =>\n  val !== null && typeof val === 'object'\n  \nconst shared = {\n    \n}\n\nexport {\n    shared\n}"],"names":[],"mappings":"MAAa,QAAQ,GAAG,CAAC,GAAY,KACnC,GAAG,KAAK,IAAI,IAAI,OAAO,GAAG,KAAK,SAAQ;MAEnC,MAAM,GAAG;;;;"}
