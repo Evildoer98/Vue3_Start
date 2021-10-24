@@ -4,7 +4,7 @@
  * @Author: Evildoer98
  * @Date: 2021-10-24 12:58:22
  * @LastEditors: Evildoer98
- * @LastEditTime: 2021-10-24 13:22:40
+ * @LastEditTime: 2021-10-24 13:54:49
 -->
 
 
@@ -79,7 +79,12 @@
     // 用来存储响应式 proxy 和 原始值的映射
     export const rawToProxy = new WeakMap<Raw, ReactiveProxy>()
 
-    
+    function createReactive<T extends Raw>(raw: T): T {
+        const reactive = new Proxy(raw, baseHandlers)
+
+        
+    }
+
 
 
 
