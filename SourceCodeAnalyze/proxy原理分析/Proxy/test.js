@@ -4,7 +4,7 @@
  * @Author: Evildoer98
  * @Date: 2021-10-24 19:04:58
  * @LastEditors: Evildoer98
- * @LastEditTime: 2021-10-27 23:48:13
+ * @LastEditTime: 2021-10-28 22:52:41
  */
 
 /**
@@ -48,11 +48,4 @@ console.log(proxy);
 console.log(target);
 
 
-let arr = [
-  {name: '小明', age: 18},
-  {name: '小红', age: 28},
-  {name: '小青', age: 38},
-  {name: '小橙', age: 48},
-  {name: '小黄', age: 58},
-  {name: '小绿', age: 68}
-]
+
