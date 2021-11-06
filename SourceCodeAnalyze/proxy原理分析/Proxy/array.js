@@ -1,12 +1,3 @@
-/*
- * @Descripttion: 
- * @version: 
- * @Author: Evildoer98
- * @Date: 2021-10-28 22:52:29
- * @LastEditors: Evildoer98
- * @LastEditTime: 2021-10-28 22:52:29
- */
-
 let arr = [
   {name: '小明', age: 18},
   {name: '小红', age: 28},
@@ -26,3 +17,8 @@ let persons = new Proxy (arr, {
   }
 })
 
+console.log(persons[0]);
+
+persons[1] = {name: 'hello', age: 12}
+console.log(persons);
+console.log(persons[1]);
